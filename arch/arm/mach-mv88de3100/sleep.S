@@ -19,7 +19,7 @@ ENTRY(mv88de3100_cpu_suspend)
 resume_with_mmu:
 	ldmfd	sp!, {r4 - r12, pc}		@ return to caller
 
-/*ENTRY(cpu_suspend)
+ENTRY(cpu_suspend)
 	mov	r9, lr
 	mov	r2, sp			@ current virtual SP
 	ldr	r0, =64
@@ -34,7 +34,7 @@ resume_with_mmu:
 	mov	lr, r9
 	b	mv88de3100_pm_cb_flushcache
 ENDPROC(cpu_suspend)
-*/	.ltorg
+	.ltorg
 
 ENTRY(cpu_do_suspend)
 	stmfd	sp!, {r4 - r11, lr}
@@ -65,7 +65,7 @@ ENDPROC(cpu_do_suspend)
  * r2 = phys page table base
  * r3 = L1 section flags
  */
-/*ENTRY(cpu_resume_mmu)
+ENTRY(cpu_resume_mmu)
 	adr	r4, cpu_resume_turn_mmu_on
 	mov	r4, r4, lsr #20
 	orr	r3, r3, r4, lsl #20
@@ -76,7 +76,7 @@ ENDPROC(cpu_do_suspend)
 	bic	r1, r0, #CR_C		@ ensure D-cache is disabled
 	b	cpu_resume_turn_mmu_on
 ENDPROC(cpu_resume_mmu)
-*/	.ltorg
+	.ltorg
 	.align	5
 cpu_resume_turn_mmu_on:
 	mcr	p15, 0, r1, c1, c0, 0	@ turn on MMU, I-cache, etc

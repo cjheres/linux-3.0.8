@@ -227,7 +227,7 @@ int memory_engine_create(memory_engine_t **engine, size_t base, size_t size, siz
 	new_engine->m_root.m_size = 0;
 
 	/* Initialize the semaphore, come up in unlocked state. */
-	sema_init(&(new_engine->m_mutex),1);
+	init_MUTEX(&(new_engine->m_mutex));
 
 	*engine = new_engine;
 

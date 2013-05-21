@@ -16,7 +16,6 @@
 #include <linux/jiffies.h>
 #include <linux/smp.h>
 #include <linux/io.h>
-#include <mach/smp.h>
 
 #include <asm/cacheflush.h>
 #include <asm/localtimer.h>
@@ -26,7 +25,6 @@
 
 #include "Galois_memmap.h"
 #include "global.h"
-#include <asm/hardware/gic.h>
 
 #define BG2_SCU_BASE	MEMMAP_CPU_PMR_REG_BASE
 #define BG2_CPU_JMP	(MEMMAP_CHIP_CTRL_REG_BASE + RA_Gbl_sw_generic1)
@@ -62,8 +60,8 @@ void __cpuinit platform_secondary_init(unsigned int cpu)
 	 * core (e.g. timer irq), then they will not have been enabled
 	 * for us: do so
 	 */
-//	gic_cpu_init(0, __io(MEMMAP_GIC_CPU_BASE));
-        gic_init(0,29, __io(MEMMAP_GIC_DIST_BASE), __io(MEMMAP_GIC_CPU_BASE));
+	gic_cpu_init(0, __io(MEMMAP_GIC_CPU_BASE));
+
 	/*
 	 * let the primary processor know we're out of the
 	 * pen, then head off into the C entry point
@@ -156,7 +154,7 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
 	unsigned int cpu = smp_processor_id();
 	int i;
 
-	//smp_store_cpu_info(cpu);
+	smp_store_cpu_info(cpu);
 
 	/*
 	 * are we trying to boot more cores than exist?

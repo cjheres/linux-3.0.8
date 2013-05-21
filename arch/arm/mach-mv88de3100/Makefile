@@ -10,7 +10,7 @@ GALOIS_FIRMWARE_DIR     = GaloisSoftware
 SOC_OBJS	+= $(SOC_DHUB_DIR)/source/hal_dhub.o
 SOC_OBJS	+= $(SOC_MISC_DIR)/source/galois_speed.o
 SOC_OBJS	+= $(SOC_GPIO_DIR)/source/gpio.o
-obj-y 	:= core.o irq.o time.o platform_devs.o pinmux.o mv88de3100.o 
+obj-y 	:= core.o irq.o time.o platform_devs.o pinmux.o mv88de3100.o
 
 mv88de3100-objs	:= $(SOC_OBJS)
 

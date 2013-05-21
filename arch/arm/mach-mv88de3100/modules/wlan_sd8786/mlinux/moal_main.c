@@ -173,8 +173,8 @@ woal_init_sw(moal_handle * handle)
     init_waitqueue_head(&handle->init_wait_q);
 
 #ifdef REASSOCIATION
-//    MOAL_INIT_SEMAPHORE(&handle->reassoc_sem);
-	sema_init(&handle->reassoc_sem,0);
+    MOAL_INIT_SEMAPHORE(&handle->reassoc_sem);
+
 #if (WIRELESS_EXT >= 18)
     handle->reassoc_on = MFALSE;
 #else
@@ -1595,8 +1595,8 @@ woal_init_module(void)
     }
 
     /* Init mutex */
-//    init_MUTEX(&AddRemoveCardSem);
-	sema_init(&AddRemoveCardSem,0);
+    init_MUTEX(&AddRemoveCardSem);
+
     /* Register with bus */
     ret = (int) woal_bus_register();
 

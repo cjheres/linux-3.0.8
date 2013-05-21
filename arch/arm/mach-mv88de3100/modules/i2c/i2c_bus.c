@@ -461,7 +461,7 @@ static struct file_operations galois_twsi_fops = {
 	.release	= galois_twsi_release,
 	.write		= galois_twsi_write,
 	.read		= galois_twsi_read,
-	.compat_ioctl	= galois_twsi_ioctl,
+	.ioctl		= galois_twsi_ioctl,
 };
 
 /*

@@ -298,13 +298,13 @@ static DECLARE_TASKLET_DISABLED(pe_rle_done_tasklet, pe_rle_do_done_tasklet, 0);
 #if CONFIG_VPP_IOCTL_MSG
 static INT vpp_instat;
 static UINT vpp_intr_timestamp;
-static DEFINE_SEMAPHORE(vpp_sem);
+static DECLARE_MUTEX(vpp_sem);
 #endif
 
 #if (BERLIN_CHIP_VERSION >= BERLIN_BG2)
 #if CONFIG_VIP_IOCTL_MSG
 static UINT vip_intr_timestamp;
-static DEFINE_SEMAPHORE(vip_sem);
+static DECLARE_MUTEX(vip_sem);
 #endif
 #endif
 
@@ -2084,7 +2084,7 @@ static int pe_device_init(unsigned int cpu_id, void *pHandle)
 #endif
 
 #if CONFIG_VPP_IOCTL_MSG
-	sema_init(&vpp_sem,1);
+	init_MUTEX_LOCKED(&vpp_sem);
 #endif
 
 #if CONFIG_VPP_ISR_MSGQ
@@ -2097,7 +2097,7 @@ static int pe_device_init(unsigned int cpu_id, void *pHandle)
 
 #if (BERLIN_CHIP_VERSION >= BERLIN_BG2)
 #if CONFIG_VIP_IOCTL_MSG
-	sema_init(&vip_sem,1);
+	init_MUTEX_LOCKED(&vip_sem);
 #endif
 #if CONFIG_VIP_ISR_MSGQ
 	err = PEMsgQ_Init(&hPEVIPMsgQ, VIP_ISR_MSGQ_SIZE);

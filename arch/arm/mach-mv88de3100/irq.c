@@ -124,19 +124,19 @@ static void sm_unmask_irq(unsigned int irq)
 }
 
 static struct irq_chip apb_irq_chip = {
-	.name			= "apb_ictl",
-	.irq_enable		= apb_enable_irq,
-	.irq_disable		= apb_disable_irq,
-	.irq_mask		= apb_mask_irq,
-	.irq_unmask		= apb_unmask_irq
+	.name		= "apb_ictl",
+	.enable		= apb_enable_irq,
+	.disable	= apb_disable_irq,
+	.mask		= apb_mask_irq,
+	.unmask		= apb_unmask_irq,
 };
 
 static struct irq_chip sm_irq_chip = {
-	.name			= "sm_ictl",
-	.irq_enable		= sm_enable_irq,
-	.irq_disable		= sm_disable_irq,
-	.irq_mask		= sm_mask_irq,
-	.irq_unmask		= sm_unmask_irq
+	.name		= "sm_ictl",
+	.enable		= sm_enable_irq,
+	.disable	= sm_disable_irq,
+	.mask		= sm_mask_irq,
+	.unmask		= sm_unmask_irq,
 };
 
 static void apb_irq_demux(unsigned int irq, struct irq_desc *desc)
@@ -144,14 +144,14 @@ static void apb_irq_demux(unsigned int irq, struct irq_desc *desc)
 	int res;
 	unsigned long cause;
 
-	desc->irq_data.chip->irq_ack(&desc->irq_data);
+	desc->chip->ack(irq);
 	cause = __raw_readl(APB_ICTL_FINALSTATUS);
 	while (cause) {
 		res = ffs(cause) - 1;
 		cause &= ~(1 << res);
 		generic_handle_irq(res + GALOIS_APB_IRQ_START);
 	}
-	desc->irq_data.chip->irq_unmask(&desc->irq_data);
+	desc->chip->unmask(irq);
 
 }
 static void sm_irq_demux(unsigned int irq, struct irq_desc *desc)
@@ -159,33 +159,30 @@ static void sm_irq_demux(unsigned int irq, struct irq_desc *desc)
 	int res;
 	unsigned long cause;
 
-	desc->irq_data.chip->irq_ack(&desc->irq_data);
+	desc->chip->ack(irq);
 	cause = __raw_readl(SM_ICTL_FINALSTATUS);
 	while (cause) {
 		res = ffs(cause) - 1;
 		cause &= ~(1 << res);
 		generic_handle_irq(res + GALOIS_SM_IRQ_START);
 	}
-
-	desc->irq_data.chip->irq_unmask(&desc->irq_data);
+	desc->chip->unmask(irq);
 }
 
 void __init mv88de3100_init_irq(void)
 {
 	int i;
 
-	gic_init(0, 29, __io(MEMMAP_GIC_DIST_BASE), __io(MEMMAP_GIC_CPU_BASE));
-
-//	gic_dist_init(0, __io(MEMMAP_GIC_DIST_BASE), 29);
-//	gic_cpu_init(0, __io(MEMMAP_GIC_CPU_BASE));
+	gic_dist_init(0, __io(MEMMAP_GIC_DIST_BASE), 29);
+	gic_cpu_init(0, __io(MEMMAP_GIC_CPU_BASE));
 
 	for (i = GALOIS_APB_IRQ_START; i < GALOIS_SM_IRQ_START; i++)
-		irq_set_chip(i, &apb_irq_chip);
+		set_irq_chip(i, &apb_irq_chip);
 	for (i = GALOIS_SM_IRQ_START; i < NR_IRQS; i++)
-		irq_set_chip(i, &sm_irq_chip);
+		set_irq_chip(i, &sm_irq_chip);
 
-	irq_set_chained_handler(IRQ_ICTLINST0CPUIRQ, apb_irq_demux);
-	irq_set_chained_handler(IRQ_SM2SOCHWINT0, sm_irq_demux);
+	set_irq_chained_handler(IRQ_ICTLINST0CPUIRQ, apb_irq_demux);
+	set_irq_chained_handler(IRQ_SM2SOCHWINT0, sm_irq_demux);
 }
 
 #ifdef CONFIG_PM
@@ -203,7 +200,7 @@ void galois_irq_suspend(void)
 	apb_ictl_inten = __raw_readl(APB_ICTL_INTEN);
 	sm_ictl_intmask = __raw_readl(SM_ICTL_INTMASK);
 	sm_ictl_inten = __raw_readl(SM_ICTL_INTEN);
-	//gic_dist_save(0);
+	gic_dist_save(0);
 	local_irq_restore(flags);
 }
 
@@ -212,7 +209,7 @@ void galois_irq_resume(void)
 	unsigned long flags;
 
 	local_irq_save(flags);
-	//gic_dist_restore(0);
+	gic_dist_restore(0);
 	__raw_writel(apb_ictl_intmask, APB_ICTL_INTMASK);
 	__raw_writel(apb_ictl_inten, APB_ICTL_INTEN);
 	__raw_writel(sm_ictl_intmask, SM_ICTL_INTMASK);
