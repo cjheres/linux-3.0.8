@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/pe/galois_pe.o := arm-unknown-linux-gnueabi-ld -EL    -r -o arch/arm/mach-mv88de3100/modules/pe/galois_pe.o arch/arm/mach-mv88de3100/modules/pe/pe_driver.o arch/arm/mach-mv88de3100/modules/pe/../../GaloisSoftware/Drivers/Galois_SoC/DHUB/source/avio_dhub_drv.o arch/arm/mach-mv88de3100/modules/pe/pe_agent_driver.o 

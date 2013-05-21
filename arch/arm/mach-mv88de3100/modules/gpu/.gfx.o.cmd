@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/gpu/gfx.o := arm-unknown-linux-gnueabi-ld -EL    -r -o arch/arm/mach-mv88de3100/modules/gpu/gfx.o arch/arm/mach-mv88de3100/modules/gpu/gfx_linux_device.o arch/arm/mach-mv88de3100/modules/gpu/gfx_linux_dispatch.o arch/arm/mach-mv88de3100/modules/gpu/gfx_linux_kernel.o 

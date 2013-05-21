@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/bt_sd8787/built-in.o :=  rm -f arch/arm/mach-mv88de3100/modules/bt_sd8787/built-in.o; arm-unknown-linux-gnueabi-ar rcs arch/arm/mach-mv88de3100/modules/bt_sd8787/built-in.o

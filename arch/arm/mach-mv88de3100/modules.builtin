@@ -1,0 +1,6 @@
+kernel/arch/arm/mach-mv88de3100/geth.ko
+kernel/arch/arm/mach-mv88de3100/sm.ko
+kernel/arch/arm/mach-mv88de3100/modules/cc/galois_cc.ko
+kernel/arch/arm/mach-mv88de3100/modules/gpio/kgpio.ko
+kernel/arch/arm/mach-mv88de3100/modules/i2c/i2c.ko
+kernel/arch/arm/mach-mv88de3100/modules/shm/galois_shm.ko

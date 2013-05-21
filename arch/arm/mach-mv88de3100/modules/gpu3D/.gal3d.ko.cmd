@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/gpu3D/gal3d.ko := arm-unknown-linux-gnueabi-ld -EL -r  -T /home/build/kernel/linux-2.6.35.14/scripts/module-common.lds --build-id -o arch/arm/mach-mv88de3100/modules/gpu3D/gal3d.ko arch/arm/mach-mv88de3100/modules/gpu3D/gal3d.o arch/arm/mach-mv88de3100/modules/gpu3D/gal3d.mod.o

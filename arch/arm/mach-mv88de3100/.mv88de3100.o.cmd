@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/mv88de3100.o := arm-unknown-linux-gnueabi-ld -EL    -r -o arch/arm/mach-mv88de3100/mv88de3100.o arch/arm/mach-mv88de3100/GaloisSoftware/Drivers/Galois_SoC/DHUB/source/hal_dhub.o arch/arm/mach-mv88de3100/GaloisSoftware/Drivers/Galois_SoC/MISC/source/galois_speed.o arch/arm/mach-mv88de3100/GaloisSoftware/Drivers/Galois_SoC/GPIO/source/gpio.o 

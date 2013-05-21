@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/wlan_sd8787/87mlan.ko := arm-unknown-linux-gnueabi-ld -EL -r  -T /home/build/kernel/linux-2.6.35.14/scripts/module-common.lds --build-id -o arch/arm/mach-mv88de3100/modules/wlan_sd8787/87mlan.ko arch/arm/mach-mv88de3100/modules/wlan_sd8787/87mlan.o arch/arm/mach-mv88de3100/modules/wlan_sd8787/87mlan.mod.o

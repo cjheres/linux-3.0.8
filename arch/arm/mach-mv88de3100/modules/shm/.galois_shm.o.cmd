@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/shm/galois_shm.o := arm-unknown-linux-gnueabi-ld -EL    -r -o arch/arm/mach-mv88de3100/modules/shm/galois_shm.o arch/arm/mach-mv88de3100/modules/shm/shm_driver.o arch/arm/mach-mv88de3100/modules/shm/shm_device.o arch/arm/mach-mv88de3100/modules/shm/memory_engine.o arch/arm/mach-mv88de3100/modules/shm/shm_api_kernel.o 

@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/bt_sd8787/bt8787.ko := arm-unknown-linux-gnueabi-ld -EL -r  -T /home/build/kernel/linux-2.6.35.14/scripts/module-common.lds --build-id -o arch/arm/mach-mv88de3100/modules/bt_sd8787/bt8787.ko arch/arm/mach-mv88de3100/modules/bt_sd8787/bt8787.o arch/arm/mach-mv88de3100/modules/bt_sd8787/bt8787.mod.o

@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-mv88de3100/modules/i2c/i2c.o := arm-unknown-linux-gnueabi-ld -EL    -r -o arch/arm/mach-mv88de3100/modules/i2c/i2c.o arch/arm/mach-mv88de3100/modules/i2c/i2c_bus.o arch/arm/mach-mv88de3100/modules/i2c/sw_i2c.o arch/arm/mach-mv88de3100/modules/i2c/../../GaloisSoftware/Drivers/Galois_SoC/APB/source/i2c_master.o 

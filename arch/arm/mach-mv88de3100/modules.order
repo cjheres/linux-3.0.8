@@ -1,0 +1,10 @@
+kernel/arch/arm/mach-mv88de3100/modules/gpu/gfx.ko
+kernel/arch/arm/mach-mv88de3100/modules/gpu3D/gal3d.ko
+kernel/arch/arm/mach-mv88de3100/modules/wlan_sd8787/87mlan.ko
+kernel/arch/arm/mach-mv88de3100/modules/wlan_sd8787/sd8787.ko
+kernel/arch/arm/mach-mv88de3100/modules/bt_sd8787/bt8787.ko
+kernel/arch/arm/mach-mv88de3100/modules/wlan_sd8786/86mlan.ko
+kernel/arch/arm/mach-mv88de3100/modules/wlan_sd8786/sd8786.ko
+kernel/arch/arm/mach-mv88de3100/modules/wlan_sd8797/97mlan.ko
+kernel/arch/arm/mach-mv88de3100/modules/wlan_sd8797/sd8797.ko
+kernel/arch/arm/mach-mv88de3100/modules/pe/galois_pe.ko
