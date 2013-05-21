@@ -1,0 +1,51 @@
+# GALOIS_FIRMWARE_DIR contains all firmware codes.
+# SOC_DIR and COMMON_DIR may be changed according to GALOIS_FIRMWARE_DIR
+# SOC_DIR and COMMON_DIR contain codes shared by Linux/eCOS/U-Boot
+GALOIS_FIRMWARE_DIR     = $(srctree)/arch/arm/mach-mv88de3100/GaloisSoftware
+SOC_DIR			= $(GALOIS_FIRMWARE_DIR)/Drivers/Galois_SoC
+COMMON_DIR		= $(GALOIS_FIRMWARE_DIR)/Common
+OSAL_DIR		= $(GALOIS_FIRMWARE_DIR)/OSAL
+
+# Low-level driver codes under SOC_DIR
+SOC_APB_DIR	= $(SOC_DIR)/APB
+SOC_COMMON_DIR	= $(SOC_DIR)/Common
+SOC_DEVINIT_DIR	= $(SOC_DIR)/DEV_INIT
+SOC_DHUB_DIR	= $(SOC_DIR)/DHUB
+SOC_GPIO_DIR	= $(SOC_DIR)/GPIO
+SOC_MISC_DIR	= $(SOC_DIR)/MISC
+SOC_PINMUX_DIR	= $(SOC_DIR)/PINMUX
+SOC_AVPLL_DIR 	= $(SOC_DIR)/AVPLL
+SOC_MISC_DIR 	= $(SOC_DIR)/MISC
+
+# __LINUX_KERNEL__ is used in OS-independent header files
+MV_DEFINE := -DBERLIN -DSoC_Galois -D__LINUX_KERNEL__ -D__CODE_LINK__=0 -DCPUINDEX=0
+MV_DEFINE += -DBERLIN_B_0=0x1000 -DBERLIN_C_0=0x2000 -DBERLIN_BG2=0x3000 -DBERLIN_BG2_Z2=0x3010 -DBERLIN_BG2_A0=0x3020
+
+# define BERLIN_CHIP_VERSION
+ifeq ($(CONFIG_MV88DE3100_BG2_Z1),y)
+	MV_DEFINE += -DBERLIN_CHIP_VERSION=BERLIN_BG2
+	FIRMWARE = Firmware_Berlin_BG2
+endif
+ifeq ($(CONFIG_MV88DE3100_BG2_Z2),y)
+	MV_DEFINE += -DBERLIN_CHIP_VERSION=BERLIN_BG2_Z2
+	FIRMWARE = Firmware_Berlin_BG2_Z2
+endif
+ifeq ($(CONFIG_MV88DE3100_BG2_A0),y)
+	MV_DEFINE += -DBERLIN_CHIP_VERSION=BERLIN_BG2_A0
+	FIRMWARE = Firmware_Berlin_BG2_A0
+endif
+
+
+HEADER_PATH :=	-I$(SOC_APB_DIR)/include \
+		-I$(SOC_COMMON_DIR)/include \
+		-I$(SOC_COMMON_DIR)/include/$(FIRMWARE) \
+		-I$(SOC_DHUB_DIR)/include \
+		-I$(SOC_MISC_DIR)/include \
+		-I$(SOC_PINMUX_DIR)/include \
+		-I$(SOC_DEVINIT_DIR)/include \
+		-I$(SOC_GPIO_DIR)/include	\
+		-I$(SOC_MISC_DIR)/include
+HEADER_PATH +=	-I$(COMMON_DIR)/include
+HEADER_PATH +=	-I$(OSAL_DIR)/include \
+		-I$(OSAL_DIR)/include/CPU0
+HEADER_PATH +=	-I$(srctree)/arch/arm/mach-mv88de3100/modules/shm
