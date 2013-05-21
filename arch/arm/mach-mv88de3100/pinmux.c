@@ -343,7 +343,7 @@ static struct file_operations galois_pinmux_fops = {
 	.open		= galois_pinmux_open,
 	.write		= galois_pinmux_write,
 	.read		= galois_pinmux_read,
-	.ioctl		= galois_pinmux_ioctl,
+	.compat_ioctl	= galois_pinmux_ioctl,
 };
 
 static struct miscdevice pinmux_dev = {

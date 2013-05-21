@@ -10,7 +10,7 @@
 #include <linux/spinlock.h>
 #include <asm/uaccess.h>
 #include <mach/galois_generic.h>
-
+#include <linux/sched.h>
 #include "SM_common.h"
 #include "SysMgr.h"
 

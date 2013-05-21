@@ -140,7 +140,7 @@ static struct task_struct* shm_lowmem_deathpending;
 static unsigned long shm_lowmem_deathpending_timeout;
 static int shm_lowmem_going;
 static struct shm_stat_info shm_stat;
-static DECLARE_MUTEX(shm_lowmem_mutex);
+static DEFINE_SEMAPHORE(shm_lowmem_mutex);
 /*********************** shm lowmem killer *****************************/
 
 #define shm_lowmem_print(level, x...)   \
@@ -907,7 +907,7 @@ static int __init shm_driver_init(void)
 	if (pstat)
 		pstat->proc_fops = &shm_stat_file_ops;
 
-	//task_free_register(&shm_task_nb);
+//	task_free_register(&shm_task_nb);
 	shm_trace("shm_driver_init OK\n");
 
 	return 0;
@@ -947,7 +947,7 @@ static void __exit shm_driver_exit(void)
 {
 	int res, i;
 
-	//task_free_unregister(&shm_task_nb);
+//	task_free_unregister(&shm_task_nb);
 
 	/* destroy shm kernel API */
 	res = MV_SHM_Exit();

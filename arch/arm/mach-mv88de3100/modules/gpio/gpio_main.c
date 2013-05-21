@@ -586,7 +586,7 @@ static struct file_operations galois_gpio_fops = {
 	.release	= galois_gpio_release,
 	.write		= galois_gpio_write,
 	.read		= galois_gpio_read,
-	.ioctl		= galois_gpio_ioctl,
+	.compat_ioctl	= galois_gpio_ioctl,
 	.poll		= galois_gpio_poll,
 };
 
